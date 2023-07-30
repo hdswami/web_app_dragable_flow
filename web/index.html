@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base href="/" />
+
+  <!-- Start For initial loading-->
+  <script src="build/web/canvaskit/canvaskit.js"></script>
+  <link rel="preload" href="build/web/canvaskit/canvaskit.wasm" as="fetch" crossOrigin="anonymous">
+  <!-- END For initial loading-->
+
+  <meta charset="UTF-8" />
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+  <meta name="description" content="Admin Console Flutter project." />
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="admin" />
+  <link rel="apple-touch-icon" href="icons/Icon-192.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <title>admin</title>
+  <link rel="manifest" href="manifest.json" />
+
+
+
+  <!-- ... -->
+  <script src="flutter.js" defer></script>
+</head>
+
+<body>
+  <div id="loading"></div>
+  <script>
+    window.addEventListener('load', function (ev) {
+      var loading = document.querySelector('#loading');
+      loading.textContent = "Loading entrypoint...";
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: async function (engineInitializer) {
+          loading.textContent = "Initializing engine...";
+          let appRunner = await engineInitializer.initializeEngine();
+
+          loading.textContent = "Running app...";
+          await appRunner.runApp();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
